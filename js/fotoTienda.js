@@ -1,7 +1,5 @@
 // En este script está el código referente a la seccion tienda(mi e-commerce) del sitio.
 
-//'use strict'
-
 let fotoProductos = [
     {
         id:"001",
@@ -74,7 +72,6 @@ let fotoProductos = [
         stock:'',
         imagen:'../images/print8.jpg',
         descripcion:''
-
     },
     {
         id:"009",
@@ -112,13 +109,15 @@ let fotoProductos = [
         imagen:'../images/print12.jpg',
         descripcion:''
     },
-
 ]
 
 
-let carrito
-let cardCart
+let carrito, cardCart
 let validadorCarrito = true
+
+const btnAgregar = document.getElementsByClassName('btn--agregar')
+let btnQuitar = document.getElementsByClassName('btn--quitar--producto')
+
 // ADD KEY CARRITO TO LOCAL STORAGE
 if(JSON.parse(localStorage.getItem('carrito'))) { // si existe la clave carrito en el storage
     carrito = JSON.parse(localStorage.getItem('carrito')) // asignar dicho valor en la variable carrito
@@ -126,6 +125,58 @@ if(JSON.parse(localStorage.getItem('carrito'))) { // si existe la clave carrito 
     localStorage.setItem('carrito', JSON.stringify([])) // seteado el local storage
     carrito = JSON.parse(localStorage.getItem('carrito')) // a la variable carrito quiero que sea lo que setié en el localStorage
 }
+
+mostrarProductos()
+
+// mostrar/ocultar carrito/tienda
+const verCarrito = document.querySelector('#ver--carrito')
+const verTienda = document.querySelector('#ver--tienda')
+const divCarrito = document.querySelector('#div--carrito')
+const fotoTienda = document.querySelector('#foto--tienda')
+const divCarritoProductos = document.querySelector('#div--carrito--productos')
+const divTotalProductos = document.querySelector('#total--carrito')
+
+verCarrito.addEventListener('click', function(){
+    fotoTienda.style.display = 'none'
+    divCarrito.style.display = 'flex'
+    verCarrito.style.display = 'none'
+    verTienda.style.display = 'block'
+    divTotalProductos.style.display = 'flex'
+    if(validadorCarrito) {
+        mostrarCarrito()
+        console.log(carrito.length)
+        validadorCarrito = false
+    } else {
+        const cardEliminar = ``
+        const totalEliminar = ``
+        divCarritoProductos.innerHTML = cardEliminar
+        divTotalProductos.innerHTML = totalEliminar
+        mostrarCarrito()
+        console.log(carrito.length)
+    }
+})
+
+verTienda.addEventListener('click', function(){
+    fotoTienda.style.display = 'flex'
+    divCarrito.style.display = 'none'
+    verTienda.style.display = 'none'
+    verCarrito.style.display = 'block'
+    divTotalProductos.style.display = 'none'
+})
+
+// ADDEVENTLISTENER A CADA BTN--AGREGAR
+for (let i = 0; i < btnAgregar.length; i++) {
+    const element = btnAgregar[i]
+    element.addEventListener('click', agregarAlCarrito)
+}
+
+// CART ITEMS COUNTER
+const contadorProductos = document.querySelector('#contador--producto')
+let contador = 0
+contadorProductos.innerHTML = `
+    <p>${contador}</p>
+    `
+
 
 //PUT CARDS OF PRODUCTS INTO HTML
 function mostrarProductos() {
@@ -163,30 +214,12 @@ function mostrarProductos() {
         container.innerHTML += card // += para sumar a lo que ya tenga en el html
     }
 }
-mostrarProductos()
-
-
-const btnAgregar = document.getElementsByClassName('btn--agregar')
-let btnQuitar = document.getElementsByClassName('btn--quitar--producto')
- // CART ITEMS COUNTER
-const contadorProductos = document.querySelector('#contador--producto')
-let contador = 0
-contadorProductos.innerHTML = `
-    <p>${contador}</p>
-    `
-
-// ADDEVENTLISTENER A CADA BTN--AGREGAR
-for (let i = 0; i < btnAgregar.length; i++) {
-    const element = btnAgregar[i]
-    element.addEventListener('click', agregarAlCarrito)
-}
 
 function agregarAlCarrito(e){
     const btn = e.target // trae exactamente el boton que el usuario clickea.
     const idBoton = btn.getAttribute('id') // sacar atributos de las etiquetas. trae el id del boton que clickea el usuario
     const productoEncontrado = fotoProductos.find((fotoProd) => fotoProd.id == idBoton) // find para saber que producto le corresponde el id, osea que fotoProd.id sea igual a lo que dice idBoton
     const enCarrito = carrito.find((fotoProd) => fotoProd.id == productoEncontrado.id) // al producto encontrado es igual al id de alguno de los productos? //recorre los productos que tenga en el carrito
-
     if(!enCarrito) { // si no existe el producto en el carrito entonces hacer esto: agregar el producto y la propiedad cantidad: 1 (propiedad cantidad añadida acá)
         carrito.push({...productoEncontrado, cantidad: 1}) //pushear al carrito. El "..." es para que en vez de pegar el objeto entero(porque productoEncontrado es un objeto), pega propiedad por propiedad. 
     } else { // si ya existe, entonces hacer lo siguiente:
@@ -201,93 +234,6 @@ function agregarAlCarrito(e){
     `
     console.log(carrito)
 }
-
-
-// REMOVE ITEMS (not implemented yet :D)
-/*
-
-for (let i = 0; i < btnAgregar.length; i++) {
-    const element = btnAgregar[i]
-    element.addEventListener('click', quitarDelCarrito)
-}
-function quitarDelCarrito(e){
-    const btn = e.target
-    const idBoton = btn.getAttribute('id')
-    //document.getElementById(`idBoton`).remove()
-    carrito.splice(id,1)
-    localStorage.setItem('carrito', JSON.stringify(carrito))
-}
-//esta no funcionó
-for (let i = 0; i < btnQuitar.length; i++){
-    const element = btnQuitar[i]
-    element.addEventListener('click', () => {
-        let carritoStorage = JSON.parse(localStorage.getItem('carrito'))
-        carritoStorage.forEach((producto, id) => {
-            let botonCard = document.getElementById(`${id}`)
-            botonCard.addEventListener('click', () => {
-                document.getElementById(`${id}`).remove()
-                carrito.splice(id,1)
-                localStorage.setItem('carrito', JSON.stringify(carrito))
-                console.log(`${producto.nombre} Eliminada`)
-            })
-        })
-    })
-}
-
-// ahora pruebo de otra forma
-for (let i = 0; i < btnAgregar.length; i++) {
-    const element = btnAgregar[i]
-    element.addEventListener('click', quitarDelCarrito)
-}
-function quitarDelCarrito(e){
-    const btn = e.target
-    const idBoton = btn.getAttribute('id')
-    document.getElementById(`idBoton`).remove()
-    carrito.splice(id,1)
-    localStorage.setItem('carrito', JSON.stringify(carrito))
-}
-*/
-
-
-// mostrar/ocultar carrito/tienda
-const verCarrito = document.querySelector('#ver--carrito')
-const verTienda = document.querySelector('#ver--tienda')
-const divCarrito = document.querySelector('#div--carrito')
-const fotoTienda = document.querySelector('#foto--tienda')
-const divCarritoProductos = document.querySelector('#div--carrito--productos')
-const divTotalProductos = document.querySelector('#total--carrito')
-
-
-
-
-verCarrito.addEventListener('click', function(){
-    
-    fotoTienda.style.display = 'none'
-    divCarrito.style.display = 'flex'
-    verCarrito.style.display = 'none'
-    verTienda.style.display = 'block'
-    divTotalProductos.style.display = 'flex'
-    if(validadorCarrito) {
-        mostrarCarrito()
-        console.log(carrito.length)
-        validadorCarrito = false
-    } else {
-        const cardEliminar = ``
-        const totalEliminar = ``
-        divCarritoProductos.innerHTML = cardEliminar
-        divTotalProductos.innerHTML = totalEliminar
-        mostrarCarrito()
-        console.log(carrito.length)
-    }
-})
-
-verTienda.addEventListener('click', function(){
-    fotoTienda.style.display = 'flex'
-    divCarrito.style.display = 'none'
-    verTienda.style.display = 'none'
-    verCarrito.style.display = 'block'
-    divTotalProductos.style.display = 'none'
-})
 
 
 // TotalCarrito 
