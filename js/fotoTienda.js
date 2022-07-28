@@ -111,11 +111,17 @@ let fotoProductos = [
     },
 ]
 
+// CART ITEMS COUNTER
+const contadorProductos = document.querySelector('#contador--producto')
+let contador = 0
+contadorProductos.innerHTML = `
+    <p>${contador}</p>
+    `
 
 let carrito, cardCart
 let validadorCarrito = true
 
-const btnAgregar = document.getElementsByClassName('btn--agregar')
+let btnAgregar = document.getElementsByClassName('btn--agregar')
 let btnQuitar = document.getElementsByClassName('btn--quitar--producto')
 
 // ADD KEY CARRITO TO LOCAL STORAGE
@@ -170,12 +176,7 @@ for (let i = 0; i < btnAgregar.length; i++) {
     element.addEventListener('click', agregarAlCarrito)
 }
 
-// CART ITEMS COUNTER
-const contadorProductos = document.querySelector('#contador--producto')
-let contador = 0
-contadorProductos.innerHTML = `
-    <p>${contador}</p>
-    `
+
 
 
 //PUT CARDS OF PRODUCTS INTO HTML
@@ -223,7 +224,7 @@ function agregarAlCarrito(e){
     if(!enCarrito) { // si no existe el producto en el carrito entonces hacer esto: agregar el producto y la propiedad cantidad: 1 (propiedad cantidad añadida acá)
         carrito.push({...productoEncontrado, cantidad: 1}) //pushear al carrito. El "..." es para que en vez de pegar el objeto entero(porque productoEncontrado es un objeto), pega propiedad por propiedad. 
     } else { // si ya existe, entonces hacer lo siguiente:
-        let carritoFiltrado = carrito.filter(fotoProd => fotoProd.id != enCarrito.id) // filtrado de productos para traer los productos que no están en el carrito.
+        const carritoFiltrado = carrito.filter(fotoProd => fotoProd.id != enCarrito.id) // filtrado de productos para traer los productos que no están en el carrito.
         carrito = [...carritoFiltrado, {...enCarrito, cantidad: enCarrito.cantidad + 1}] //agregar todos los productos(propiedad por propiedad) menos el que yo encontré en el carrito. agregar la cantidad que yo tenía en el carrito del producto + 1
     }
     localStorage.setItem('carrito', JSON.stringify(carrito))
@@ -232,7 +233,6 @@ function agregarAlCarrito(e){
     contadorProductos.innerHTML = `
     <p>${contador}</p>
     `
-    console.log(carrito)
 }
 
 
@@ -254,10 +254,10 @@ function mostrarCarrito(){
         
     } else {
         
-         // el div donde van las cards de los productos
+        // el div donde van las cards de los productos
         for (let i = 0; i < carrito.length; i++) {
             const element = carrito[i];
-            const {id, nombre, tamaño, precio, stock, descripcion, imagen, cantidad} = element
+            const {id, nombre, precio, imagen, cantidad} = element
             const cardCart = `
             <div class="div--carrito--producto">
                 <div>
@@ -298,15 +298,17 @@ function mostrarCarrito(){
             
             ` 
         divTotalProductos.innerHTML += cardTotal
-        
-
         // REMOVE CARDS FROM CARRITO
-        let vaciarCarrito = document.querySelector('#btn--vaciar--carrito')
+        const vaciarCarrito = document.querySelector('#btn--vaciar--carrito')
         vaciarCarrito.addEventListener('click', function (){
             const cardVacio = ` 
             `
-            
-            divCarritoProductos.innerHTML = cardVacio
+            const cardVacio2 = `
+                <div>
+                    <h1>No hay productos en el carrito</h1>
+                </div>
+            `
+            divCarritoProductos.innerHTML = cardVacio2
             divTotalProductos.innerHTML = cardVacio
             //REMOVE ITEMS FROM LOCALSTORAGE
             localStorage.removeItem('carrito')
