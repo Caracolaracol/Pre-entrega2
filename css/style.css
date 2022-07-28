@@ -317,10 +317,14 @@ h1 {
 
 #div--carrito {
   display: none;
-  flex-direction: column; }
+  flex-direction: column;
+  justify-content: center; }
   #div--carrito #flex--titulo--carrito {
     display: flex;
-    flex-direction: row; }
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: center;
+    margin: 1rem; }
 
 @keyframes aparecer--div--carrito {
   from {
@@ -331,8 +335,18 @@ h1 {
 .imagen--carrito {
   width: 5rem; }
 
-.div--carrito--producto {
+#div--carrito--productos {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; }
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  #div--carrito--productos .div--carrito--producto {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem; }
+
+#total--carrito {
+  display: flex; }
