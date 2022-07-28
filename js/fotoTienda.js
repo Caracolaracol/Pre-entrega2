@@ -1,6 +1,6 @@
 // En este script está el código referente a la seccion tienda(mi e-commerce) del sitio.
 
-'use strict'
+//'use strict'
 
 let fotoProductos = [
     {
@@ -298,7 +298,6 @@ function totalCarrito(){ // funcion para que de el total del carrito
 // cambio a página carrito de compras. 2 páginas una cuando no existan productos en el carrito y la otra cuando si existan
 // SHOW CART
 function mostrarCarrito(){
-    
     if(carrito.length == 0) { 
         const textoCarritoVacio = `
         <div>
@@ -346,8 +345,33 @@ function mostrarCarrito(){
                     $${totalCarrito().toLocaleString()}
                 </h2>
             </div>
+            
+            <div id="vaciar--carrito">
+                <button id="btn--vaciar--carrito">Vaciar carrito</button>
+            </div>
+            
             ` 
         divTotalProductos.innerHTML += cardTotal
         
+
+        // REMOVE CARDS FROM CARRITO
+        let vaciarCarrito = document.querySelector('#btn--vaciar--carrito')
+        vaciarCarrito.addEventListener('click', function (){
+            const cardVacio = ` 
+            `
+            
+            divCarritoProductos.innerHTML = cardVacio
+            divTotalProductos.innerHTML = cardVacio
+            //REMOVE ITEMS FROM LOCALSTORAGE
+            localStorage.removeItem('carrito')
+            //RETURN TO 0 THE COUNTER
+            contador = 0
+            contadorProductos.innerHTML = `
+                <p>${contador}</p>
+                `
+            carrito = []
+            })
     }
 }
+
+
