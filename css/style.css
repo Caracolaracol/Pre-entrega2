@@ -324,7 +324,7 @@ h1 {
     flex-direction: row;
     gap: 3rem;
     justify-content: center;
-    margin: 1.2rem; }
+    margin: 1rem; }
 
 @keyframes aparecer--div--carrito {
   from {

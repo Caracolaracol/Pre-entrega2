@@ -118,7 +118,7 @@ let fotoProductos = [
 
 let carrito
 let cardCart
-
+let validadorCarrito = true
 // ADD KEY CARRITO TO LOCAL STORAGE
 if(JSON.parse(localStorage.getItem('carrito'))) { // si existe la clave carrito en el storage
     carrito = JSON.parse(localStorage.getItem('carrito')) // asignar dicho valor en la variable carrito
@@ -257,8 +257,11 @@ const fotoTienda = document.querySelector('#foto--tienda')
 const divCarritoProductos = document.querySelector('#div--carrito--productos')
 const divTotalProductos = document.querySelector('#total--carrito')
 
-let validadorCarrito = true
+
+
+
 verCarrito.addEventListener('click', function(){
+    
     fotoTienda.style.display = 'none'
     divCarrito.style.display = 'flex'
     verCarrito.style.display = 'none'
@@ -266,15 +269,15 @@ verCarrito.addEventListener('click', function(){
     divTotalProductos.style.display = 'flex'
     if(validadorCarrito) {
         mostrarCarrito()
-        console.log(carrito)
+        console.log(carrito.length)
         validadorCarrito = false
-        
     } else {
         const cardEliminar = ``
         const totalEliminar = ``
         divCarritoProductos.innerHTML = cardEliminar
         divTotalProductos.innerHTML = totalEliminar
         mostrarCarrito()
+        console.log(carrito.length)
     }
 })
 
@@ -295,6 +298,7 @@ function totalCarrito(){ // funcion para que de el total del carrito
 // cambio a página carrito de compras. 2 páginas una cuando no existan productos en el carrito y la otra cuando si existan
 // SHOW CART
 function mostrarCarrito(){
+    
     if(carrito.length == 0) { 
         const textoCarritoVacio = `
         <div>
@@ -304,6 +308,7 @@ function mostrarCarrito(){
         divCarrito.innerHTML += textoCarritoVacio
         
     } else {
+        
          // el div donde van las cards de los productos
         for (let i = 0; i < carrito.length; i++) {
             const element = carrito[i];
