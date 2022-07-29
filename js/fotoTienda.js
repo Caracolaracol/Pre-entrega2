@@ -134,6 +134,7 @@ if(JSON.parse(localStorage.getItem('carrito'))) { // si existe la clave carrito 
 
 mostrarProductos()
 
+
 // mostrar/ocultar carrito/tienda
 const verCarrito = document.querySelector('#ver--carrito')
 const verTienda = document.querySelector('#ver--tienda')
@@ -141,6 +142,7 @@ const divCarrito = document.querySelector('#div--carrito')
 const fotoTienda = document.querySelector('#foto--tienda')
 const divCarritoProductos = document.querySelector('#div--carrito--productos')
 const divTotalProductos = document.querySelector('#total--carrito')
+
 
 verCarrito.addEventListener('click', function(){
     fotoTienda.style.display = 'none'
@@ -160,6 +162,11 @@ verCarrito.addEventListener('click', function(){
         mostrarCarrito()
         console.log(carrito.length)
     }
+    // ADDEVENTLISTENER A CADA BTN--QUITAR--PRODUCTO
+    for (let i = 0; i < btnQuitar.length; i++) {
+        const element = btnQuitar[i]
+        element.addEventListener('click', quitarDelCarrito)
+        }
 })
 
 verTienda.addEventListener('click', function(){
@@ -173,10 +180,9 @@ verTienda.addEventListener('click', function(){
 // ADDEVENTLISTENER A CADA BTN--AGREGAR
 for (let i = 0; i < btnAgregar.length; i++) {
     const element = btnAgregar[i]
+    
     element.addEventListener('click', agregarAlCarrito)
 }
-
-
 
 
 //PUT CARDS OF PRODUCTS INTO HTML
@@ -218,6 +224,7 @@ function mostrarProductos() {
 
 function agregarAlCarrito(e){
     const btn = e.target // trae exactamente el boton que el usuario clickea.
+    console.log(btn)
     const idBoton = btn.getAttribute('id') // sacar atributos de las etiquetas. trae el id del boton que clickea el usuario
     const productoEncontrado = fotoProductos.find((fotoProd) => fotoProd.id == idBoton) // find para saber que producto le corresponde el id, osea que fotoProd.id sea igual a lo que dice idBoton
     const enCarrito = carrito.find((fotoProd) => fotoProd.id == productoEncontrado.id) // al producto encontrado es igual al id de alguno de los productos? //recorre los productos que tenga en el carrito
@@ -233,6 +240,24 @@ function agregarAlCarrito(e){
     contadorProductos.innerHTML = `
     <p>${contador}</p>
     `
+    
+}
+
+function quitarDelCarrito(e) {
+    const btn2 = e.target // el boton que el usuario clickea
+    console.log(btn2)
+    const idBoton = btn2.getAttribute('id') // el id de dicho boton( 001, 002, 003, etc..)
+    console.log(idBoton)
+    const productoEncontrado = fotoProductos.find((fotoProd) => fotoProd.id == idBoton) // encuentra el objeto(en fotoProductos) con el id del boton
+    const enCarrito = carrito.find((fotoProd) => fotoProd.id == productoEncontrado.id) //encuentra el objeto(en carrito) con el mismo id del producto clickeado
+    //const carritoFiltrado2 = carrito.filter(fotoProd => fotoProd.id != enCarrito.id)
+    //carrito = [carritoFiltrado2]
+    let index = carrito.indexOf(enCarrito)
+    console.log(index)
+    let cantidadDeElementosABorrar = 1
+    carrito.splice(index, cantidadDeElementosABorrar);
+
+    localStorage.setItem('carrito', JSON.stringify(carrito))
 }
 
 
