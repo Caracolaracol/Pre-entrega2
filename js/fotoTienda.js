@@ -218,7 +218,11 @@ const verTienda = document.querySelector('#ver--tienda')
 const divCarrito = document.querySelector('#div--carrito')
 const fotoTienda = document.querySelector('#foto--tienda')
 const divCarritoProductos = document.querySelector('#div--carrito--productos')
+
+const contadorProductos = document.querySelector('#contador--producto')
+let contador = 0
 let validadorCarrito = true
+
 
 // SHOW PRODUCTS
 function mostrarProductos(){
@@ -253,6 +257,8 @@ function mostrarProductos(){
     })
 }
 mostrarProductos()
+showCartItems()
+
 
 // ADD TO CART
 function addToCart(id) {
@@ -270,25 +276,17 @@ function addToCart(id) {
 
 // VER CARRITO
 verCarrito.addEventListener('click', function(){
+    
+    divTotalProductos.style.display = 'flex'
     fotoTienda.style.display = 'none'
     divCarrito.style.display = 'flex'
     verCarrito.style.display = 'none'
     verTienda.style.display = 'block'
-    divTotalProductos.style.display = 'flex'
-    /*
-    if(validadorCarrito) {
-        mostrarCarrito()
-        console.log(carrito.length)
-        validadorCarrito = false
-    } else {
-        const cardEliminar = ``
-        const totalEliminar = ``
-        divCarritoProductos.innerHTML = cardEliminar
-        divTotalProductos.innerHTML = totalEliminar
-        mostrarCarrito()
-        console.log(carrito.length)
-    }
-    */
+    const vaciarCarrito = document.querySelector('.btn--vaciar--carrito')
+    vaciarCarrito.addEventListener('click', function(e){
+        e.preventDefault
+        borrarCarrito()
+    })
 })
 // VER TIENDA
 verTienda.addEventListener('click', function(){
@@ -299,15 +297,39 @@ verTienda.addEventListener('click', function(){
     divTotalProductos.style.display = 'none'
 })
 
+//VACIAR CARRITO
+
+
+
 //UPDATE CART
 function updateCart(){
     showCartItems()
     localStorage.setItem('cart', JSON.stringify(cart)) //actualizar el localstorage
+
 }
 
 // MOSTRAR ITEMS AL GRID CARRITO
 function showCartItems(){
     cartItems.innerHTML = ` ` //borrar los elementos para que no se dupliquen
+    const cardTotal = `
+    <div>
+        <h2>
+            Total:
+        </h2>
+    </div>
+    <div>
+        <h2>
+            $${totalCarrito().toLocaleString()}
+        </h2>
+    </div>
+    
+    <div id="vaciar--carrito">
+        <button class="btn--vaciar--carrito">Vaciar carrito</button>
+    </div>
+    
+    ` 
+    divTotalProductos.innerHTML = cardTotal
+    
     cart.forEach((item) => {
         cartItems.innerHTML += `
             <div class="div--carrito--producto">
@@ -315,7 +337,7 @@ function showCartItems(){
                     <img src=${item.imagen} class="imagen--carrito" alt="">
                 </div>
                 <div>
-                    <h3 class="nombre--producto">${item.name}</h3>
+                    <h3 class="nombre--producto">${item.nombre}</h3>
                 </div>
                 <div>
                     <p>${item.cantidad}</p>
@@ -329,31 +351,12 @@ function showCartItems(){
             </div>
             `
     })
-    const cardTotal = `
-            <div>
-                <h2>
-                    Total:
-                </h2>
-            </div>
-            <div>
-                <h2>
-                    $${totalCarrito().toLocaleString()}
-                </h2>
-            </div>
-            
-            <div id="vaciar--carrito">
-                <button id="btn--vaciar--carrito">Vaciar carrito</button>
-            </div>
-            
-            ` 
-    divTotalProductos.innerHTML += cardTotal
 }
 
 
 // REMOVE ITEM FROM CART
 function removeItemFromCart(id){
     cart = cart.filter( (item) => item.id !== id) // filtrar el array quitando el producto con el id que quiero eliminar
-    
     updateCart()
 }
 
@@ -362,3 +365,16 @@ function totalCarrito(){ // funcion para que de el total del carrito
     return cart.reduce((acumulador, fotoProd) => acumulador + fotoProd.precio * fotoProd.cantidad, 0) //recurrer el producto. acumulador + el precio del producto multiplicado por la cantidad (la cantidad propiedad ya va a estar creada)
 }
 
+function borrarCarrito(){
+    const cardVacio = ` 
+    `
+    const cardVacio2 = `
+        <div>
+            <h1>No hay productos en el carrito</h1>
+        </div>
+    `
+    divCarritoProductos.innerHTML = cardVacio2
+    divTotalProductos.innerHTML = cardVacio
+    
+    localStorage.removeItem('cart')
+}
