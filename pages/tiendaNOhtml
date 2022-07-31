@@ -42,7 +42,7 @@
         
         <!-- CARDS DE PRODUCTOS-->
         <div id="foto--tienda">
-            <div class="foto-productos" id="productos--container">
+            <div id="cards--container">
                 
             </div>
         </div>

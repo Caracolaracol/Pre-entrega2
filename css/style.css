@@ -292,7 +292,7 @@ h1 {
   #titulo--tienda #ver--tienda {
     display: none; }
 
-#cards--container {
+#productos--container {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
@@ -342,12 +342,26 @@ h1 {
   align-items: center;
   justify-content: center; }
   #div--carrito--productos .div--carrito--producto {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0em 0em;
+    grid-template-areas: "f1 f2 f3 f4";
+    width: 85%;
     margin-bottom: 0.5rem;
     gap: 0.5rem; }
+
+.div--valor--carrito {
+  grid-area: f4; }
+
+.div--nombre--carrito {
+  grid-area: f3; }
+
+.div--cantidad--carrito {
+  grid-area: f2; }
+
+.div--imagen--carrito {
+  grid-area: f1; }
 
 #total--carrito {
   display: flex; }
