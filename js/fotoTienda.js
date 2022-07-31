@@ -333,16 +333,16 @@ function showCartItems(){
     cart.forEach((item) => {
         cartItems.innerHTML += `
             <div class="div--carrito--producto">
-                <div>
+                <div class="div--imagen--carrito">
                     <img src=${item.imagen} class="imagen--carrito" alt="">
                 </div>
-                <div>
+                <div class="div--nombre--carrito">
                     <h3 class="nombre--producto">${item.nombre}</h3>
                 </div>
-                <div>
+                <div class="div--cantidad--carrito">
                     <p>${item.cantidad}</p>
                 </div>
-                <div>
+                <div class="div--valor--carrito">
                     <p>$${(item.precio * item.cantidad).toLocaleString()}</p>
                 </div>
                 <div class="quitar--producto">
@@ -350,7 +350,10 @@ function showCartItems(){
                 </div>
             </div>
             `
-    })
+        if (item.cantidad == 0){
+            cartItems.innerHTML = ` `
+        }
+})
 }
 
 
@@ -366,6 +369,19 @@ function totalCarrito(){ // funcion para que de el total del carrito
 }
 
 function borrarCarrito(){
+    cart = cart.filter((item) => item.cantidad !== 0)
+    for (const obj of fotoProductos) {
+        if (obj.cantidad !== 0) {
+            obj.cantidad = 0;
+            break;
+        }
+    }
+    
+    for (const obj of cart) {
+        if (obj.cantidad !== 0) {
+            obj.cantidad = 0;
+        }
+    }
     const cardVacio = ` 
     `
     const cardVacio2 = `

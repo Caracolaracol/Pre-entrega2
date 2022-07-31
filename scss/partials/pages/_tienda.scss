@@ -10,13 +10,18 @@
     }
 
 }
+
+
 #productos--container{
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: 2rem;
     text-align: center;
     padding:.4rem;
     padding-top: 1rem;
+    max-height: 60vh;
+    max-width: 520%;
     animation: aparecer--cards--container  250ms ease-out
 }
 
@@ -44,12 +49,18 @@
     flex-direction: column;
     justify-content: center;
     #flex--titulo--carrito {
-        display: flex;
-        flex-direction: row;
-        gap: 3rem;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr; 
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+        "t1 t2 t3 t4 t5";
+        gap: 1rem;
         margin:1rem;
+        #titulo--producto {grid-area: t1 / t2;}
+        #titulo--cantidad {grid-area: t3;}
+        #titulo--precio {grid-area: t4;}
     }
+
 }
 
 @keyframes aparecer--div--carrito {
@@ -71,28 +82,42 @@
         display: grid; 
         grid-template-columns: 1fr 1fr 1fr 1fr; 
         grid-template-rows: 1fr; 
-        gap: 0em 0em; 
+        gap: 1em 1em; 
         grid-template-areas: 
         "f1 f2 f3 f4 f5"; 
         width: 85%;   
         margin-bottom: 0.5rem;
         gap: 0.5rem;
-        
+        border-radius: 6px;
+        align-items: center;
+        background-color:rgba(38, 24, 82,0.2);
+        img {
+            display:flex;
+            align-items: center;
+        }
     }
+    
 }
 
 // GRID CARDS CARRITO
-.btn--quitar--producto {grid-area: f5;}
-.div--valor--carrito { grid-area: f4; }
-.div--nombre--carrito { grid-area: f3; }
-.div--cantidad--carrito { grid-area: f2; }
+.quitar--producto {grid-area: f5;}
+.div--valor--carrito { 
+    grid-area: f4; 
+    text-align: center;
+}
+.div--cantidad--carrito { 
+    grid-area: f3;
+    text-align: center;
+}
+.div--nombre--carrito { grid-area: f2; }
 .div--imagen--carrito { grid-area: f1; }
 
 
 
 #total--carrito {
     display: flex;
-    #vaciar--carrito {
-        margin-left: 40rem;
-    }
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 40rem;
+    gap:2rem;
 }
