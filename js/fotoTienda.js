@@ -218,11 +218,19 @@ const verTienda = document.querySelector('#ver--tienda')
 const divCarrito = document.querySelector('#div--carrito')
 const fotoTienda = document.querySelector('#foto--tienda')
 const divCarritoProductos = document.querySelector('#div--carrito--productos')
-
 const contadorProductos = document.querySelector('#contador--producto')
-let contador = 0
+
 let validadorCarrito = true
 
+function contarProductos(){
+    let contador = 0
+    cart.forEach((prod) => {
+        contador = contador + prod.cantidad
+    })
+    contadorProductos.innerHTML = `
+                <p>${contador}</p>
+                `
+}
 
 // SHOW PRODUCTS
 function mostrarProductos(){
@@ -253,9 +261,11 @@ function mostrarProductos(){
                 <button class="btn--agregar" type="button">Agregar al carrito</button>
             </div>
         </div>
-        `
+        ` 
     })
+    
 }
+contarProductos()
 mostrarProductos()
 showCartItems()
 
@@ -272,6 +282,7 @@ function addToCart(id) {
         cart.push({...productoEncontrado, cantidad: 1})
     }
     updateCart()
+    contarProductos()
 }
 
 // VER CARRITO
@@ -285,7 +296,12 @@ verCarrito.addEventListener('click', function(){
     const vaciarCarrito = document.querySelector('.btn--vaciar--carrito')
     vaciarCarrito.addEventListener('click', function(e){
         e.preventDefault
+        contador = 0
+        contadorProductos.innerHTML = `
+                <p>${contador}</p>
+                `
         borrarCarrito()
+        contarProductos()
     })
 })
 // VER TIENDA
@@ -297,15 +313,10 @@ verTienda.addEventListener('click', function(){
     divTotalProductos.style.display = 'none'
 })
 
-//VACIAR CARRITO
-
-
-
 //UPDATE CART
 function updateCart(){
     showCartItems()
     localStorage.setItem('cart', JSON.stringify(cart)) //actualizar el localstorage
-
 }
 
 // MOSTRAR ITEMS AL GRID CARRITO
@@ -353,6 +364,7 @@ function showCartItems(){
         if (item.cantidad == 0){
             cartItems.innerHTML = ` `
         }
+        contarProductos()
 })
 }
 
@@ -391,6 +403,5 @@ function borrarCarrito(){
     `
     divCarritoProductos.innerHTML = cardVacio2
     divTotalProductos.innerHTML = cardVacio
-    
     localStorage.removeItem('cart')
 }
