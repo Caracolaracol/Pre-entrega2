@@ -4,13 +4,13 @@
     box-sizing: border-box;
     color: rgb(181, 175, 193);
     font-size: 16px;
-    overflow-y: auto;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    //overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow: auto;
 }
 
 body {
     min-height:100vh;  
+    max-height: 100vh;
     position:relative; 
     background-color: rgb(1, 1, 2);
 }
@@ -19,9 +19,7 @@ main {
     float: left;
     padding: 2rem;
     width: 65vw;
-    max-width: 70%;
-    max-height: 80%;
-    overflow-y: hidden;
+    max-height: 70vh;
 }
 h3 {
     font-size: 16px;

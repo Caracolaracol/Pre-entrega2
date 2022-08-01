@@ -110,7 +110,7 @@ let fotoProductos = [
     },
     {
         id:12,
-        nombre:'Abeja joya',
+        nombre:'Ichneumonido',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -119,7 +119,7 @@ let fotoProductos = [
     },
     {
         id:13,
-        nombre:'Abeja joya',
+        nombre:'Araña pollito',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -128,7 +128,7 @@ let fotoProductos = [
     },
     {
         id:14,
-        nombre:'Abeja joya',
+        nombre:'Chaqueta amarilla',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -137,7 +137,7 @@ let fotoProductos = [
     },
     {
         id:15,
-        nombre:'Abeja joya',
+        nombre:'Escarabajo joya',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -146,7 +146,7 @@ let fotoProductos = [
     },
     {
         id:16,
-        nombre:'Abeja joya',
+        nombre:'Mariposa de la tarde',
         tamaño:'30x40cm, 40x30cm, 40',
         precio: 20000,
         enStock:3,
@@ -155,7 +155,7 @@ let fotoProductos = [
     },
     {
         id:17,
-        nombre:'Abeja joya',
+        nombre:'Hormigon dorado alado',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -164,7 +164,7 @@ let fotoProductos = [
     },
     {
         id:18,
-        nombre:'Abeja joya',
+        nombre:'Pupa',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -173,7 +173,7 @@ let fotoProductos = [
     },
     {
         id:19,
-        nombre:'Abeja joya',
+        nombre:'Hormiga',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -182,7 +182,7 @@ let fotoProductos = [
     },
     {
         id:20,
-        nombre:'Abeja joya',
+        nombre:'Miriapodo',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -191,7 +191,7 @@ let fotoProductos = [
     },
     {
         id:21,
-        nombre:'Abeja joya',
+        nombre:'Hormiga argentina',
         tamaño:'30x40cm, 40x30cm, 40',
         precio:20000,
         enStock:3,
@@ -219,9 +219,9 @@ const divCarrito = document.querySelector('#div--carrito')
 const fotoTienda = document.querySelector('#foto--tienda')
 const divCarritoProductos = document.querySelector('#div--carrito--productos')
 const contadorProductos = document.querySelector('#contador--producto')
-
 let validadorCarrito = true
 
+// FUNCION DEL CONTADOR
 function contarProductos(){
     let contador = 0
     cart.forEach((prod) => {
@@ -323,19 +323,26 @@ function updateCart(){
 function showCartItems(){
     cartItems.innerHTML = ` ` //borrar los elementos para que no se dupliquen
     const cardTotal = `
-    <div>
-        <h2>
-            Total:
-        </h2>
-    </div>
-    <div>
-        <h2>
-            $${totalCarrito().toLocaleString()}
-        </h2>
-    </div>
-    
-    <div id="vaciar--carrito">
-        <button class="btn--vaciar--carrito">Vaciar carrito</button>
+    <div id="c">
+        <div id="c1">
+            
+        </div>
+        <div id="c2">
+            
+        </div>
+        <div id="c3">
+            <h2>
+                Total:
+            </h2>
+        </div>
+        <div id="c4">
+            <h2>
+                $${totalCarrito().toLocaleString()}
+            </h2>
+        </div>
+        <div id="vaciar--carrito">
+            <button class="btn--vaciar--carrito">Vaciar carrito</button>
+        </div>
     </div>
     
     ` 
@@ -380,6 +387,7 @@ function totalCarrito(){ // funcion para que de el total del carrito
     return cart.reduce((acumulador, fotoProd) => acumulador + fotoProd.precio * fotoProd.cantidad, 0) //recurrer el producto. acumulador + el precio del producto multiplicado por la cantidad (la cantidad propiedad ya va a estar creada)
 }
 
+//BORRAR CARRITO
 function borrarCarrito(){
     cart = cart.filter((item) => item.cantidad !== 0)
     for (const obj of fotoProductos) {
