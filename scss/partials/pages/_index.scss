@@ -1,0 +1,34 @@
+#index--welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: .3rem;
+    width: 100vw;
+    height: 80vh;
+    animation: aparecer--index--container  450ms ease-in;
+    overflow: hidden;
+}
+@keyframes aparecer--index--container {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.menu--show {
+    display: none;
+}
+
+#main--show {
+    display: none;
+}
+.footer--show{
+    display: none;
+}
+
+.round-img {
+    border-radius: 80% 80%;
+    width: 12rem;
+    clip-path: circle();
+}
+
