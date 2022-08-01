@@ -316,6 +316,11 @@ h1 {
   width: 12rem;
   clip-path: circle(); }
 
+#text--welcome {
+  text-align: center; }
+  #text--welcome h3 {
+    padding: 1rem; }
+
 #titulo--tienda {
   margin-bottom: 2rem;
   display: flex;
