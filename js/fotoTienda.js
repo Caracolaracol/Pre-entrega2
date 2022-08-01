@@ -317,6 +317,16 @@ verTienda.addEventListener('click', function(){
 function updateCart(){
     showCartItems()
     localStorage.setItem('cart', JSON.stringify(cart)) //actualizar el localstorage
+    const vaciarCarrito = document.querySelector('.btn--vaciar--carrito')
+    vaciarCarrito.addEventListener('click', function(e){
+        e.preventDefault
+        contador = 0
+        contadorProductos.innerHTML = `
+                <p>${contador}</p>
+                `
+        borrarCarrito()
+        contarProductos()
+    })
 }
 
 // MOSTRAR ITEMS AL GRID CARRITO
