@@ -1,3 +1,11 @@
+//Operador Ternario / AND / OR. Busca estructuras condicionales simples en tu proyecto y simplifícalas utilizando operador ternario u operadores lógicos AND y OR.
+
+//Optimización. Con lo visto en clase, optimiza la asignación condicional de variables.
+
+
+//Desestructuración. Aplica la desestructuración según corresponda para recuperar propiedades de objetos con claridad y rapidez.
+
+//Spread. Usa el operador spread para replicar objetos o arrays o, también, para mejorar la lógica de tus funciones.
 //PRODUCT LIST
 let fotoProductos = [
     {
@@ -235,6 +243,7 @@ function contarProductos(){
 // SHOW PRODUCTS
 function mostrarProductos(){
     fotoProductos.forEach((fotoProducto) => {
+        
         productosContainer.innerHTML += `
         <div class="card">
             <div>
@@ -277,9 +286,13 @@ function addToCart(id) {
         const enCarrito = cart.find((fotoProd) => fotoProd.id == productoEncontrado.id)
         const carritoFiltrado = cart.filter(fotoProd => fotoProd.id != enCarrito.id) // filtrado de productos para traer los productos que no están en el carrito.
         cart = [...carritoFiltrado, {...enCarrito, cantidad: enCarrito.cantidad + 1}] //agregar todos los productos(propiedad por propiedad) menos el que yo encontré en el carrito. agregar la cantidad que yo tenía en el carrito del producto +
+        const {nombre, enStock} = productoEncontrado
+        console.log(`El producto ${nombre} tiene ${enStock} unidades en stock`)
     } else {
         const productoEncontrado = fotoProductos.find((producto) => producto.id === id )
         cart.push({...productoEncontrado, cantidad: 1})
+        const {nombre, enStock} = productoEncontrado
+        console.log(`El producto ${nombre} tiene ${enStock} unidades en stock`)
     }
     updateCart()
     contarProductos()

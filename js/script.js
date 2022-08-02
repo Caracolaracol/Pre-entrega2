@@ -413,50 +413,26 @@ function validarClickHp(e){
     }
 }
 
-//ingresar datos y validador
+//ingresar datos y validador // OPERADOR TERNARIO
 function acortarValidadorIngresoDatos2() {
     for (i = 1; i <= numero; i++) {
         if (i === 1) {
-            if(isNaN(hp1)){
-                hp1Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[0].nombre}</b>`
-            } else {
-                hp1Parrafo.innerHTML =``
-            }
+            (isNaN(hp1)) ? hp1Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[0].nombre}</b>` : hp1Parrafo.innerHTML =``
         }
         if (i === 2) {
-            if (isNaN(hp2)) {
-                hp2Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[1].nombre}</b>`
-            } else {
-                hp2Parrafo.innerHTML =``
-            }
+            (isNaN(hp2)) ? hp2Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[1].nombre}</b>`: hp2Parrafo.innerHTML =``
         }   
         if (i === 3) {
-            if (isNaN(hp3)) {
-                hp3Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[2].nombre}</b>`
-            } else {
-                hp3Parrafo.innerHTML =``
-            }
+            (isNaN(hp3)) ? hp3Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[2].nombre}</b>` : hp3Parrafo.innerHTML =``
         }
         if (i === 4) {
-            if (isNaN(hp4)) {
-                hp4Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[3].nombre}</b>`
-            } else {
-                hp4Parrafo.innerHTML =``
-            }
+            (isNaN(hp4)) ? hp4Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[3].nombre}</b>` : hp4Parrafo.innerHTML =``
         }
         if (i === 5) {
-            if (isNaN(hp5)) {
-                hp5Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[4].nombre}</b>`
-            } else {
-                hp5Parrafo.innerHTML =``
-            }
+            (isNaN(hp5)) ? hp5Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[4].nombre}</b>` : hp5Parrafo.innerHTML =``
         }
         if (i === 6) {
-            if (isNaN(hp6)) {
-                hp6Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[5].nombre}</b>`
-            } else {
-                hp6Parrafo.innerHTML =``
-            }
+            (isNaN(hp6)) ? hp6Parrafo.innerHTML = `datos no válidos a tu <b>${pokemones[5].nombre}</b>` : hp6Parrafo.innerHTML =``
         }
     }
 }
@@ -597,19 +573,21 @@ btnPagar.addEventListener('click', function(){
 
 
 //SUBMIT ID de paciente
-
 let formIdSubmit = document.querySelector('#form--id')
 formIdSubmit.addEventListener('submit', function(e){
     e.preventDefault()
     ingresoDatos3()
     idEncontrado()
+    validadorIdEncontrado()
     if (validadorId){
         pushId()
+        console.log(ids)
         contenedorHtml()
         ocultarForm2()
         divFinal()
     }
 })
+
 
 function acortarValidadorIngresoDatos3() {
     for (i = 1; i <= numero; i++) {
@@ -732,35 +710,72 @@ function ingresoDatos3() {
             break
         case 6:
             acortarValidadorIngresoDatos3()
-            if(!isNaN(idABuscar1) && !isNaN(idAVuscar2) &&!isNaN(idABuscar3) && !isNaN(idABuscar4) && !isNaN(idABuscar5) && !isNaN(idABuscar6)){
+            if(!isNaN(idABuscar1) && !isNaN(idABuscar2) &&!isNaN(idABuscar3) && !isNaN(idABuscar4) && !isNaN(idABuscar5) && !isNaN(idABuscar6)){
                 validadorId = true
             }
             break
     }
 }
 
+
 function idEncontrado(){
     for (i = 1; i <= numero; i++) {
         if (i === 1) {
-            idEncontrado1 = pokemones.find(element => element.id === idABuscar1)
+            idEncontrado1 = pokemones.find(element => element.id === idABuscar1) ?? console.log("ID no corresponde")
         }
         if (i === 2) {
-            idEncontrado2 = pokemones.find(element => element.id === idABuscar2)
+            idEncontrado2 = pokemones.find(element => element.id === idABuscar2) ?? console.log("ID no corresponde")
         }
         if (i === 3) {
-            idEncontrado3 = pokemones.find(element => element.id === idABuscar3)
+            idEncontrado3 = pokemones.find(element => element.id === idABuscar3) ?? console.log("ID no corresponde")
         }
         if (i === 4) {
-            idEncontrado4 = pokemones.find(element => element.id === idABuscar4)
+            idEncontrado4 = pokemones.find(element => element.id === idABuscar4) ?? console.log("ID no corresponde")
         }
         if (i === 5) {
-            idEncontrado5 = pokemones.find(element => element.id === idABuscar5)
+            idEncontrado5 = pokemones.find(element => element.id === idABuscar5) ?? console.log("ID no corresponde")
         }
         if (i === 6){
-            idEncontrado6 = pokemones.find(element => element.id === idABuscar6)
+            idEncontrado6 = pokemones.find(element => element.id === idABuscar6) ?? console.log("ID no corresponde")
         }
     }
 }
+function validadorIdEncontrado(){
+    switch(numero){
+        case 1:
+            if(idEncontrado1 == undefined){
+                validadorId = false
+            }
+            break
+        case 2:
+            
+            if(idEncontrado1 == undefined || idEncontrado2 == undefined){
+                validadorId = false
+            }
+            break
+        case 3:
+            if(idEncontrado1 == undefined || idEncontrado2 == undefined || idEncontrado3 == undefined){
+                validadorId = false
+            }
+            break
+        case 4:
+            if(idEncontrado1 == undefined || idEncontrado2 == undefined || idEncontrado3 == undefined || idEncontrado4 == undefined){
+                validadorId = false
+            }
+            break
+        case 5:
+            if(idEncontrado1 == undefined || idEncontrado2 == undefined || idEncontrado3 == undefined || idEncontrado4 == undefined || idEncontrado5 == undefined){
+                validadorId = false
+            }
+            break
+        case 6:
+            if(idEncontrado1 == undefined || idEncontrado2 == undefined || idEncontrado3 == undefined || idEncontrado4 == undefined || idEncontrado5 == undefined || idEncontrado6 == undefined){
+                validadorId = false
+            }
+            break
+    }
+}
+
 
 function pushId() {
     for (i = 1; i <= numero; i++) {
