@@ -1,3 +1,4 @@
+// JS ANTIGUO / NO UTILIZADO
 // En este script está el código referente a la seccion tienda(mi e-commerce) del sitio.
 
 let fotoProductos = [

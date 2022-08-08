@@ -17,7 +17,7 @@ main {
   float: left;
   padding: 2rem;
   width: 65vw;
-  max-height: 70vh; }
+  max-height: 80vh; }
 
 h3 {
   font-size: 16px;
@@ -29,17 +29,16 @@ button {
   text-decoration: none;
   border-radius: 4px;
   background-color: #0b0421;
-  width: 8rem;
   transition-duration: 0.2s;
   cursor: pointer;
-  padding: 0.2rem; }
+  padding: 0.8rem; }
   button:hover {
     background-color: #1e1247;
     /* Green */
     color: #ddd4ed; }
 
 .menu--title {
-  padding-bottom: .2rem;
+  padding-bottom: .4rem;
   padding-top: .5rem; }
 
 .footer {
@@ -53,7 +52,8 @@ button {
   border-top-color: rgba(243, 241, 248, 0.259);
   display: flex;
   flex-direction: row;
-  justify-content: space-between; }
+  justify-content: space-between;
+  background-color: #010102; }
 
 .footer-texto {
   padding: 1rem; }
@@ -71,9 +71,12 @@ button {
   margin: 1.7rem; }
 
 .menu {
-  margin: 2rem;
+  margin: 1.6rem;
   width: 14rem;
   float: left; }
+  .menu section div ul li a {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none; }
 
 li {
   font-size: 15px;
@@ -338,6 +341,9 @@ h1 {
   #titulo--tienda #ver--tienda {
     display: none; }
 
+#foto--tienda {
+  position: relative; }
+
 #productos--container {
   display: flex;
   flex-wrap: wrap;
@@ -357,11 +363,13 @@ h1 {
 .card {
   transition-duration: 0.1s;
   background-color: black;
-  border-radius: 5px;
-  width: 12rem; }
-
-.fotos--tienda {
-  width: 12rem; }
+  border-radius: 4px;
+  width: 12.2rem;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(80, 80, 80, 0.305); }
+  .card div .fotos--tienda {
+    width: 12.1rem; }
 
 #div--carrito {
   display: none;
@@ -428,13 +436,14 @@ h1 {
 
 #c {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 1em 1em;
-  grid-template-areas: "c1 c2 c3 c4 c5";
+  grid-template-areas: "c1 c2 c3 c4 c5 c6";
   gap: 2rem;
   width: 100%;
   justify-items: center;
+  align-items: center;
   background-color: rgba(21, 13, 47, 0.2); }
   #c #c1 {
     grid-area: c1; }
@@ -446,3 +455,5 @@ h1 {
     grid-area: c4; }
   #c #vaciar--carrito {
     grid-area: c5; }
+  #c #realizar--compra {
+    grid-area: c6; }

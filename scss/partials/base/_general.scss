@@ -19,8 +19,9 @@ main {
     float: left;
     padding: 2rem;
     width: 65vw;
-    max-height: 70vh;
+    max-height: 80vh;
 }
+
 h3 {
     font-size: 16px;
     font-family:Arial, Helvetica, sans-serif
@@ -32,17 +33,17 @@ button {
     text-decoration: none;
     border-radius: 4px;
     background-color: rgb(11, 4, 33);
-    width: 8rem;
     transition-duration: 0.2s;
     cursor: pointer;
-    padding: 0.2rem;
+    padding: 0.8rem;
     &:hover{
         background-color: rgb(30, 18, 71); /* Green */
         color:rgb(221, 212, 237);
     }
 }
 
+
 .menu--title {
-    padding-bottom:.2rem ;
+    padding-bottom:.4rem ;
     padding-top:.5rem ;
 }

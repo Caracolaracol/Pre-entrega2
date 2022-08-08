@@ -10,6 +10,9 @@
     }
 }
 
+#foto--tienda {
+    position: relative;
+}   
 
 #productos--container{
     display: flex;
@@ -20,6 +23,7 @@
     padding:.4rem;
     padding-top: 1rem;
     animation: aparecer--cards--container  250ms ease-out;
+
 }
 
 @keyframes aparecer--cards--container {
@@ -32,13 +36,19 @@
 .card {
     transition-duration: 0.1s;
     background-color: rgb(0, 0, 0);
-    border-radius: 5px;  
-    width: 12rem;
+    border-radius: 4px;  
+    width: 12.2rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(80, 80, 80, 0.305);
+    div {
+        .fotos--tienda {
+            width: 12.1rem;
+        }
+    }
 }
 
-.fotos--tienda {
-    width: 12rem;
-}
+
 
 // CARRITO DE COMPRAS
 #div--carrito {
@@ -115,14 +125,15 @@
 // TOTAL PRICE ROW
 #c {
     display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
     grid-template-rows: 1fr; 
     gap: 1em 1em; 
     grid-template-areas: 
-    "c1 c2 c3 c4 c5"; 
+    "c1 c2 c3 c4 c5 c6"; 
     gap:2rem;
     width: 100%;
     justify-items: center;
+    align-items: center;
     background-color:rgba(21, 13, 47, 0.2);
     #c1 {
         grid-area: c1;
@@ -138,5 +149,8 @@
     }
     #vaciar--carrito {
         grid-area: c5;
+    }
+    #realizar--compra {
+        grid-area: c6;
     }
 }

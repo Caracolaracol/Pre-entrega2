@@ -1,11 +1,3 @@
-//Operador Ternario / AND / OR. Busca estructuras condicionales simples en tu proyecto y simplifícalas utilizando operador ternario u operadores lógicos AND y OR.
-
-//Optimización. Con lo visto en clase, optimiza la asignación condicional de variables.
-
-
-//Desestructuración. Aplica la desestructuración según corresponda para recuperar propiedades de objetos con claridad y rapidez.
-
-//Spread. Usa el operador spread para replicar objetos o arrays o, también, para mejorar la lógica de tus funciones.
 //PRODUCT LIST
 let fotoProductos = [
     {
@@ -243,7 +235,45 @@ function contarProductos(){
 // SHOW PRODUCTS
 function mostrarProductos(){
     fotoProductos.forEach((fotoProducto) => {
-        
+        /*
+        if (fotoProductos.findIndex <= 8)
+        productosContainer.innerHTML += `
+        <div class="card">
+            <div>
+                <img src="${fotoProducto.imagen}" class="fotos--tienda">
+            </div>
+            <div>
+                <h3>
+                ${fotoProducto.nombre}
+                </h3>
+            </div>
+            
+            <div>
+                <p>
+                ${fotoProducto.descripcion}
+                </p>
+            </div>
+            <div>
+                <!-- <p> Tamaños: ${fotoProducto.tamaño}  </p> -->
+                <!-- <p>${fotoProducto.stock} disponibles </p> -->
+                <p>$${fotoProducto.precio.toLocaleString()}</p> <!-- toLocalString para que el numero salga con punto cuando es mil -->
+            </div>
+            
+            <div class="btn--container" onclick="addToCart(${fotoProducto.id})">
+                <button class="btn--agregar" type="button">Agregar al carrito</button>
+            </div>
+        </div>
+        ` 
+        if (fotoProductos.length > 8) {
+            //
+            // let contadorfotoproductos = 8
+            // contadorfotoproductos++
+            // if contadorfotoproductos === fotoProductos.length {
+            //containerpagina2.innerHTML += `divs divs divs`
+            //}
+        }
+
+        */
         productosContainer.innerHTML += `
         <div class="card">
             <div>
@@ -296,6 +326,29 @@ function addToCart(id) {
     }
     updateCart()
     contarProductos()
+    Toastify({
+        text: "Producto agregado al carrito 🛒 ",
+        duration: 3000,
+        //destination: "https://github.com/apvarun/toastify-js",
+        newWindow: false,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+        display: "inline-block",
+        background: "linear-gradient(to top, rgba(5, 5, 5, 1.0), rgba(30, 18, 71, 0.7))",
+        position: "fixed",
+        padding: "12px 20px",
+        transition: "all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        animation : "aparecer--div--carrito 250ms ease-in",
+        left : "88%",
+        borderRadius: "8px",
+        backdropFilter: "blur(8.9px)"
+        /* Created with https://www.css-gradient.com */
+        },
+        onClick: function(){} // Callback after click
+    }).showToast();
 }
 
 // VER CARRITO
@@ -306,6 +359,7 @@ verCarrito.addEventListener('click', function(){
     divCarrito.style.display = 'flex'
     verCarrito.style.display = 'none'
     verTienda.style.display = 'block'
+    alertCompra()
     const vaciarCarrito = document.querySelector('.btn--vaciar--carrito')
     vaciarCarrito.addEventListener('click', function(e){
         e.preventDefault
@@ -365,6 +419,9 @@ function showCartItems(){
         </div>
         <div id="vaciar--carrito">
             <button class="btn--vaciar--carrito">Vaciar carrito</button>
+        </div>
+        <div id="realizar--compra">
+            <button class="btn--realizar--compra">Realizar compra</button>
         </div>
     </div>
     
@@ -436,3 +493,23 @@ function borrarCarrito(){
     divTotalProductos.innerHTML = cardVacio
     localStorage.removeItem('cart')
 }
+
+function alertCompra() {
+    const btnComprar = document.querySelector('.btn--realizar--compra')
+    btnComprar.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Compra realizada',
+            text:'Gracias por su compra',
+            confirmButtonText: 'Save',
+            background: 'rgba(54, 36, 113, 0.8)'
+            })
+        contador = 0
+        contadorProductos.innerHTML = `
+            <p>${contador}</p>
+            `
+        borrarCarrito()
+        contarProductos()
+    })
+}
+
+//
