@@ -1,8 +1,39 @@
-/*  
-
+/*
 Script del centro pokemon privatizado, juego simulador de centro pokemon privatizado ( osea te cobra!), el usuario debe recordar los ID de paciente de sus pokemon para retirarlos.
 */
-
+let select1 = document.getElementById('select__Poke1')
+let select2 = document.getElementById('select__Poke2')
+let select3 = document.getElementById('select__Poke3')
+let select4 = document.getElementById('select__Poke4')
+let select5 = document.getElementById('select__Poke5')
+let select6 = document.getElementById('select__Poke6')
+// traer los datos de la api de pokemon a los select del formulario del html
+fetch("https://pokeapi.co/api/v2/pokemon?limit=150&offset=0") // api de los primeros 150 pokemon
+.then(response => response.json())
+.then(data => {
+    arrayPkm = data.results // pido sólo lo que contiene la propiedad results(el array con los 150 pokemon)
+    arrayPkm.forEach(poke => {
+        select1.innerHTML += `
+        <option value="${poke.name}">${poke.name}</option>
+    `
+        select2.innerHTML += `
+        <option value="${poke.name}">${poke.name}</option>
+    `
+        select3.innerHTML += `
+        <option value="${poke.name}">${poke.name}</option>
+    `
+        select4.innerHTML += `
+        <option value="${poke.name}">${poke.name}</option>
+    `
+        select5.innerHTML += `
+        <option value="${poke.name}">${poke.name}</option>
+    `
+        select6.innerHTML += `
+        <option value="${poke.name}">${poke.name}</option>
+    `
+    });
+    
+})
 //Arrays vacios
 let ids = []
 let pokemones = []
@@ -65,7 +96,6 @@ function mostrarOcultar() {
     mainSubtitle.style.display = 'flex'
     mainDiv.style.display = 'grid'
     divNombre.innerHTML = `<h3> Hola <i>${nombreUsuario}</i> como estas? soy la enfermera Joy!, Bienvenidx al centro pokemon.</h3>`
-
 }
 
 let pPoke = document.querySelector('#div-btn-poke')
@@ -160,7 +190,7 @@ function mostrarFormPoke(){
                 mostrarInputHp3.forEach(input => {
                     input.style.display = 'block'
                     input.innerHTML = `
-                    A tu <b>${pokemones[1].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[1].id}</b>. ¿cuánto HP le falta?
+                    A tu <b>${pokemones[2].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[2].id}</b>. ¿cuánto HP le falta?
                     `
                 })
             }
@@ -177,8 +207,9 @@ function mostrarFormPoke(){
                 mostrarInputHp4.forEach(input => {
                     input.style.display = 'block'
                     input.innerHTML = `
-                    A tu <b>${pokemones[1].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[1].id}</b>. ¿cuánto HP le falta?
+                    A tu <b>${pokemones[3].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[3].id}</b>. ¿cuánto HP le falta?
                     `
+                    
                 })
             }
             
@@ -191,7 +222,7 @@ function mostrarFormPoke(){
                 mostrarInputHp5.forEach(input => {
                     input.style.display = 'block'
                     input.innerHTML = `
-                    A tu <b>${pokemones[1].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[1].id}</b>. ¿cuánto HP le falta?
+                    A tu <b>${pokemones[4].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[4].id}</b>. ¿cuánto HP le falta?
                     `
                 })
             }
@@ -207,7 +238,7 @@ function mostrarFormPoke(){
                 mostrarInputHp6.forEach(input => {
                     input.style.display = 'block'
                     input.innerHTML = `
-                    A tu <b>${pokemones[1].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[1].id}</b>. ¿cuánto HP le falta?
+                    A tu <b>${pokemones[5].nombre}</b> le asignaremos la id de paciente = <b>${pokemones[5].id}</b>. ¿cuánto HP le falta?
                     `
                 })
             }
@@ -252,7 +283,7 @@ function ingresoDatos(){
         switch(i) {
             case 1:
                 if (i === 1){
-                    nombre1 = document.querySelector('#poke1').value  
+                    nombre1 = select1.options[select1.selectedIndex].text  
                     nivel1 = parseFloat(document.querySelector('#nivelPoke1').value)
                     posicion1 = 1
                     id1 = Math.floor(Math.random() * 99) 
@@ -261,7 +292,7 @@ function ingresoDatos(){
                 break
             case 2:
                 if (i === 2){
-                    nombre2 = document.querySelector('#poke2').value 
+                    nombre2 = select2.options[select2.selectedIndex].text 
                     nivel2 = parseFloat(document.querySelector('#nivelPoke2').value)
                     posicion2 = 2
                     id2 = Math.floor(Math.random() * 99)
@@ -273,18 +304,19 @@ function ingresoDatos(){
                 break
             case 3:
                 if (i === 3){
-                    nombre3 = document.querySelector('#poke3').value 
+                    nombre3 = select3.options[select3.selectedIndex].text
                     nivel3 = parseFloat(document.querySelector('#nivelPoke3').value)
                     posicion3 = 3
                     id3 = Math.floor(Math.random() * 99)
                     while(id3 === id2 || id3 === id1){ 
                         id3 = Math.floor(Math.random() * 99)
                     }
+                    console.log(nombre3)
                 }
                 break
             case 4:
                 if (i === 4){
-                    nombre4 = document.querySelector('#poke4').value 
+                    nombre4 = select4.options[select4.selectedIndex].value
                     nivel4 = parseFloat(document.querySelector('#nivelPoke4').value)
                     posicion3 = 4
                     id4 = Math.floor(Math.random() * 99)
@@ -295,7 +327,7 @@ function ingresoDatos(){
                 break
             case 5:
                 if (i === 5){
-                    nombre5 = document.querySelector('#poke5').value 
+                    nombre5 = select5.options[select5.selectedIndex].value 
                     nivel5 = parseFloat(document.querySelector('#nivelPoke5').value)
                     posicion3 = 5
                     id5 = Math.floor(Math.random() * 99)
@@ -306,7 +338,7 @@ function ingresoDatos(){
                 break
             case 6:
                 if (i === 6){
-                    nombre6 = document.querySelector('#poke6').value 
+                    nombre6 = select6.options[select6.selectedIndex].value 
                     nivel6 = parseFloat(document.querySelector('#nivelPoke6').value)
                     posicion6 = 6
                     id6 = Math.floor(Math.random() * 99)
@@ -328,7 +360,7 @@ let btnPoke = document.querySelector('#btn--poke')
 function validarClickNombrar(e){
     e.preventDefault()
     ingresoDatos()
-    console.log(nombre1)
+    
     pokemon1 = new Pokemon(nombre1, nivel1, posicion1, id1)
     pokemon2 = new Pokemon(nombre2, nivel2, posicion2, id2)
     pokemon3 = new Pokemon(nombre3, nivel3, posicion3, id3)
@@ -346,7 +378,6 @@ function validarClickNombrar(e){
 
     //mostrar abrir hp
     hpHidden.style.display = 'block';
-    
 }
 
 // metodo push para añadir pokemones al array

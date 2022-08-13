@@ -1,4 +1,41 @@
 //PRODUCT LIST
+
+fetch('../json/fotoProductos.json').then(response => response.json()).
+then(productos => {
+    inner(productos)
+})
+
+function inner(productos) {
+    productos.forEach((fotoProducto) => {
+        productosContainer.innerHTML += `
+        <div class="card">
+            <div>
+                <img src="../images/${fotoProducto.imagen}" class="fotos--tienda">
+            </div>
+            <div>
+                <h3>
+                ${fotoProducto.nombre}
+                </h3>
+            </div>
+            
+            <div>
+                <p>
+                ${fotoProducto.descripcion}
+                </p>
+            </div>
+            <div>
+                <!-- <p> Tamaños: ${fotoProducto.tamaño}  </p> -->
+                <!-- <p>${fotoProducto.stock} disponibles </p> -->
+                <p>$${fotoProducto.precio.toLocaleString()}</p> <!-- toLocalString para que el numero salga con punto cuando es mil -->
+            </div>
+            
+            <div class="btn--container" onclick="addToCart(${fotoProducto.id})">
+                <button class="btn--agregar" type="button">Agregar al carrito</button>
+            </div>
+        </div>
+        ` 
+    })
+}
 let fotoProductos = [
     {
         id:0,
@@ -234,7 +271,7 @@ function contarProductos(){
 
 // SHOW PRODUCTS
 function mostrarProductos(){
-    fotoProductos.forEach((fotoProducto) => {
+    /*fotoProductos.forEach((fotoProducto) => {
         /*
         if (fotoProductos.findIndex <= 8)
         productosContainer.innerHTML += `
@@ -273,7 +310,7 @@ function mostrarProductos(){
             //}
         }
 
-        */
+        
         productosContainer.innerHTML += `
         <div class="card">
             <div>
@@ -302,7 +339,7 @@ function mostrarProductos(){
         </div>
         ` 
     })
-    
+    */
 }
 contarProductos()
 mostrarProductos()
