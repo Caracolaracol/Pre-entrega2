@@ -1,10 +1,11 @@
 //PRODUCT LIST
 
+// busca los productos en fotoProductos.json
 fetch('../json/fotoProductos.json').then(response => response.json())
 .then(productos => {
     inner(productos)
 })
-
+// agrega los productos a la tienda
 function inner(productos) {
     productos.forEach((fotoProducto) => {
         productosContainer.innerHTML += `
@@ -269,9 +270,10 @@ function contarProductos(){
                 `
 }
 
-// SHOW PRODUCTS
+// SHOW PRODUCTS (ESTE CODIGO LO CAMBIÉ POR FETCH)
+/* 
 function mostrarProductos(){
-    /*fotoProductos.forEach((fotoProducto) => {
+    fotoProductos.forEach((fotoProducto) => {
         /*
         if (fotoProductos.findIndex <= 8)
         productosContainer.innerHTML += `
@@ -339,10 +341,11 @@ function mostrarProductos(){
         </div>
         ` 
     })
-    */
+    
 }
+*/
 contarProductos()
-mostrarProductos()
+// mostrarProductos()
 showCartItems()
 
 
