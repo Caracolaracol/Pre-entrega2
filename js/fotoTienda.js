@@ -1,7 +1,7 @@
 //PRODUCT LIST
 
-fetch('../json/fotoProductos.json').then(response => response.json()).
-then(productos => {
+fetch('../json/fotoProductos.json').then(response => response.json())
+.then(productos => {
     inner(productos)
 })
 

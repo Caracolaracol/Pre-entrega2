@@ -7,7 +7,12 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     overflow: auto;
 }
-
+@font-face {
+    font-family: 'pkmnfont';
+    src: url('/css/fonts/PKMN\ RBYGSC.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
 body {
     min-height:100vh;  
     max-height: 100vh;
